@@ -1,29 +1,9 @@
+WENDY 原
 // --- START OF FILE main.ts ---
 
 import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
 import { serveDir } from "https://deno.land/std@0.224.0/http/file_server.ts";
 import { Buffer } from "https://deno.land/std@0.177.0/node/buffer.ts";
-
-// 预设管理员账户和密码
-const ADMIN_CREDENTIALS = [
-  { username: "wendy", password: "cocoiris" }
-];
-
-// 认证函数：验证 Authorization 头
-function authenticate(authHeader: string | null): boolean {
-  if (!authHeader || !authHeader.startsWith("Basic ")) {
-    return false;
-  }
-
-  const base64Credentials = authHeader.split(" ")[1];
-  const credentials = atob(base64Credentials).split(":");
-  const inputUsername = credentials[0];
-  const inputPassword = credentials[1];
-
-  return ADMIN_CREDENTIALS.some(
-    (cred) => cred.username === inputUsername && cred.password === inputPassword
-  );
-}
 
 // --- 辅助函数：生成错误 JSON 响应 ---
 function createJsonErrorResponse(message: string, statusCode = 500) { /* ... */ }
